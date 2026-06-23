@@ -7,8 +7,13 @@ resource "docker_container" "prometheus" {
   name    = "prometheus"
   image   = docker_image.prometheus.image_id
   restart = "unless-stopped"
-  networks_advanced { name = docker_network.cicd.name }
-  ports { internal = 9090; external = 9090 }
+  networks_advanced {
+    name = docker_network.cicd.name
+  }
+  ports {
+    internal = 9090
+    external = 9090
+  }
   volumes {
     host_path      = abspath("${path.module}/../monitoring/prometheus.yml")
     container_path = "/etc/prometheus/prometheus.yml"
@@ -25,7 +30,12 @@ resource "docker_container" "grafana" {
   name    = "grafana"
   image   = docker_image.grafana.image_id
   restart = "unless-stopped"
-  networks_advanced { name = docker_network.cicd.name }
-  ports { internal = 3000; external = 3000 }
+  networks_advanced {
+    name = docker_network.cicd.name
+  }
+  ports {
+    internal = 3000
+    external = 3000
+  }
   env = ["GF_SECURITY_ADMIN_PASSWORD=admin"]
 }
