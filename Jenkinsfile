@@ -125,7 +125,7 @@ pipeline {
         }
 
         stage('Push') {
-            when { branch 'main' }
+            when { environment name: "BRANCH_NAME", value: "main" }
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'github-token',
@@ -145,7 +145,7 @@ pipeline {
         }
 
         stage('IaC Apply') {
-            when { branch 'main' }
+            when { environment name: "BRANCH_NAME", value: "main" }
             steps {
                 dir('infra') {
                     sh 'terraform init -input=false'
@@ -158,7 +158,7 @@ pipeline {
         }
 
         stage('Deploy Staging') {
-            when { branch 'main' }
+            when { environment name: "BRANCH_NAME", value: "main" }
             steps {
                 sh 'curl -f http://localhost:8082/health || exit 1'
             }
