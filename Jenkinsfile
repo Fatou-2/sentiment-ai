@@ -157,7 +157,7 @@ pipeline {
 
         stage('Deploy Staging') {
             steps {
-                sh 'curl -f http://sentiment-staging:8000/health || exit 1'
+                sh 'docker run --rm --network cicd-network curlimages/curl:latest -f http://sentiment-staging:8000/health'
             }
         }
     }
