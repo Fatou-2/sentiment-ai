@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = 'sentiment-ai'
         REGISTRY = 'ghcr.io/fatou-2'
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
     }
 
     stages {
