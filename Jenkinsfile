@@ -157,7 +157,7 @@ pipeline {
 
         stage('Deploy Staging') {
             steps {
-                sh 'curl -f http://172.20.0.4:8000/health || exit 1'
+                sh 'curl -f http://sentiment-staging:8000/health || exit 1'
             }
         }
     }
